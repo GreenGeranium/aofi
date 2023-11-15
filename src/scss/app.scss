@@ -1,0 +1,55 @@
+@import './components/header';
+@import './components/cart';
+@import './components/main';
+@import './components/card';
+@import './components/section_no-categories';
+@import './components/section_categories';
+@import './components/popup';
+@import './components/footer';
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.path {
+  grid-area: path;
+  margin: 20px 0 0 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #8F8F8F;
+  display: flex;
+  column-gap: 17.29px;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+
+  .arrow {
+    background-image: url('../images/pathicon.svg');
+    width: 6.12px ;
+    height: 9.41px;
+    content: '';
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

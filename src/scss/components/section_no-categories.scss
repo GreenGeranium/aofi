@@ -1,0 +1,75 @@
+.section_no-categories {
+  flex: 1;
+  padding: 0 130px;
+  margin: 0 auto 60px;
+  font-family: 'Helvetica', sans-serif;
+  max-width: 1440px;
+  box-sizing: border-box;
+  width: 100%;
+
+  @media screen and (max-width: 1000px) {
+    padding: 0 70px 40px;
+  }
+
+  @media screen and (max-width: 750px) {
+    padding: 0 10px 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0 10px 10px;
+  }
+
+  h2 {
+    margin: 20px 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 70px;
+    grid-area: heading;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @media screen and (max-width: 768px) {
+      font-size: 45px;
+    }
+
+  }
+
+  .cardcolumn {
+    .main_image {
+      width: 100%;
+      height: 180px;
+      margin-bottom: 20px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    h3 {
+      font-style: normal;
+      font-size: 30px;
+      line-height: 40px;
+      margin: 0 0 15px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(auto, 380px));
+      grid-template-rows: repeat(auto-fit, minmax(auto, 390px));
+      column-gap: 20px;
+      row-gap: 15px;
+      justify-content: center;
+
+      @media screen and (max-width: 800px) {
+        grid-template-columns: repeat(auto-fit, minmax(auto, 430px));
+      }
+
+      @media screen and (max-width: 500px) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

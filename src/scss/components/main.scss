@@ -1,0 +1,161 @@
+.main {
+  flex: 1;
+  margin: 0 auto;
+  max-width: 1440px;
+
+  h2 {
+    font-family: 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 70px;
+    margin: 0 0 30px 0;
+  }
+
+  .cover {
+
+    .slider {
+      width: 100%;
+
+      .slide {
+        flex: 0 0 ;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .dots {
+        display: flex;
+        column-gap: 28px;
+        justify-content: center;
+        margin: 24px 0 34px;
+
+        @media screen and (max-width: 600px) {
+          margin: 20px 0;
+        }
+
+        @media screen and (max-width: 400px) {
+          margin: 15px 0;
+          column-gap: 15px;
+        }
+
+        .dot {
+          width: 13px;
+          height: 13px;
+          margin: 0;
+          border-radius: 50%;
+          background-color: #DFDFDF;;
+          cursor: pointer;
+
+          @media screen and (max-width: 400px) {
+            width: 10px;
+            height: 10px;
+          }
+        }
+        .dot.active {
+          background-color: #052555;;
+        }
+      }
+    }
+  }
+
+  .section {
+    padding: 0 130px 40px;
+
+    @media screen and (max-width: 1000px) {
+      padding: 0 70px 40px;
+    }
+
+    @media screen and (max-width: 750px) {
+      padding: 0 10px 40px;
+    }
+
+    @media screen and (max-width: 500px) {
+      padding: 0 10px 10px;
+    }
+
+    article {
+      height: 260px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Helvetica', sans-serif;
+      position: relative;
+
+      @media screen and (max-width: 500px) {
+        min-height: 200px;
+        height: unset;
+      }
+
+      h3 {
+        margin: 40px 0 0 33px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 40px;
+        color: black;
+
+        @media screen and (max-width: 500px) {
+          margin-top: 20px;
+          font-size: 20px;
+          line-height: normal;
+        }
+
+      }
+
+      h4 {
+        margin: 10px 0 30px 33px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #F26D0D;
+
+        @media screen and (max-width: 670px) {
+          font-size: 12px;
+        }
+
+      }
+
+      p {
+        margin: 0 0 0 33px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        max-width: 547px;
+        overflow: hidden;
+
+        @media screen and (max-width: 670px) {
+          font-size: 14px;
+          line-height: normal;
+          margin: 0 33px;
+        }
+      }
+
+
+      img {
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -2;
+        object-fit: cover;
+
+      }
+
+    }
+  }
+
+}
+
+
