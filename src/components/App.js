@@ -68,7 +68,7 @@ function App() {
     console.log(formData);
 
     try {
-      const response = await fetch('http://158.160.23.0:3001/send-email', {
+      const response = await fetch('http://emailer.fitnessassociation.ru/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
