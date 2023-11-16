@@ -1,6 +1,6 @@
-import Popup from "./Popup";
-import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import Popup from './Popup';
+import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 
 function OrderPopup(props) {
   // приняты ли условия
@@ -12,6 +12,7 @@ function OrderPopup(props) {
     formState: { errors },
     setValue,
     reset,
+    getValues,
   } = useForm();
 
   const handleChange = (e) => {
@@ -29,30 +30,18 @@ function OrderPopup(props) {
       popupName="order"
     >
       <h2>Введите данные</h2>
-      <h3>
-        Оставьте заявку на вступление в ассоциацию и получайте персональные
-        предложения
-      </h3>
+      <h3>Оставьте заявку на вступление в ассоциацию и получайте персональные предложения</h3>
       <form
         method="post"
         onSubmit={(event) => {
           event.preventDefault();
-          fetch("/../sendmail.php", {
-            method: "POST",
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data); // Handle response from PHP file
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-          //handleSubmit(props.onSubmit);
+          const values = getValues();
+          props.onSubmit(values);
         }}
       >
         <label>
           <input
-            {...register("name", {
+            {...register('name', {
               required: 'Поле "ФИО" обязательно для заполнения',
               minLength: {
                 value: 8,
@@ -60,8 +49,7 @@ function OrderPopup(props) {
               },
               maxLength: {
                 value: 40,
-                message:
-                  'Максимальная длина поля "ФИО" составляет 100 символов',
+                message: 'Максимальная длина поля "ФИО" составляет 100 символов',
               },
             })}
             type="text"
@@ -71,37 +59,33 @@ function OrderPopup(props) {
           {errors.name && <p className="error">{errors.name.message}</p>}
         </label>
         <label>
-          {" "}
+          {' '}
           <input
-            {...register("telephone", {
+            {...register('telephone', {
               required: 'Поле "Номер телефона" обязательно для заполнения',
               minLength: {
                 value: 11,
-                message:
-                  'Минимальная длина поля "Номер телефона" составляет 11 символов',
+                message: 'Минимальная длина поля "Номер телефона" составляет 11 символов',
               },
               maxLength: {
                 value: 20,
-                message:
-                  'Максимальная длина поля "Номер телефона" составляет 20 символов',
+                message: 'Максимальная длина поля "Номер телефона" составляет 20 символов',
               },
               pattern: {
                 value: /^[\d+\-() ]+$/,
-                message: "Пожалуйста, введите номер в правильном формате",
+                message: 'Пожалуйста, введите номер в правильном формате',
               },
             })}
             type="text"
             placeholder="+7 (000) 000-00-00"
             onChange={handleChange}
           />
-          {errors.telephone && (
-            <p className="error">{errors.telephone.message}</p>
-          )}
+          {errors.telephone && <p className="error">{errors.telephone.message}</p>}
         </label>
         <label>
-          {" "}
+          {' '}
           <input
-            {...register("email", {
+            {...register('email', {
               required: 'Поле "E-mail" обязательно для заполнения',
               minLength: {
                 value: 3,
@@ -109,7 +93,7 @@ function OrderPopup(props) {
               },
               pattern: {
                 value: /^\S+@\S+\.\S+$/,
-                message: "Пожалуйста, введите адрес в правильном формате",
+                message: 'Пожалуйста, введите адрес в правильном формате',
               },
             })}
             type="email"
@@ -120,22 +104,18 @@ function OrderPopup(props) {
         </label>
         <label>
           <input
-            {...register("organization", {
+            {...register('organization', {
               minLength: {
                 value: 3,
-                message:
-                  'Минимальная длина поля "Название организации" составляет 3 символа',
+                message: 'Минимальная длина поля "Название организации" составляет 3 символа',
               },
-              required:
-                'Поле "Название организации" обязательно для заполнения',
+              required: 'Поле "Название организации" обязательно для заполнения',
             })}
             type="text"
             placeholder="Название организации"
             onChange={handleChange}
           />
-          {errors.organization && (
-            <p className="error">{errors.organization.message}</p>
-          )}
+          {errors.organization && <p className="error">{errors.organization.message}</p>}
         </label>
 
         <button type="submit">Отправить заказ</button>

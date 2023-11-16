@@ -1,16 +1,16 @@
-import "../scss/app.scss";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router";
-import InfoPopup from "./InfoPopup";
-import Cart from "./Cart";
-import SectionWithCategories from "./SectionWithCategories";
-import SectionWithoutCategories from "./SectionWithoutCategories";
-import OrderPopup from "./OrderPopup";
-import api from "../utils/api";
-import { backUrl } from "../utils/db";
+import '../scss/app.scss';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router';
+import InfoPopup from './InfoPopup';
+import Cart from './Cart';
+import SectionWithCategories from './SectionWithCategories';
+import SectionWithoutCategories from './SectionWithoutCategories';
+import OrderPopup from './OrderPopup';
+import api from '../utils/api';
+import { backUrl } from '../utils/db';
 
 function App() {
   // данные по категориям
@@ -21,7 +21,7 @@ function App() {
 
   // карточки в корзине
   const [cartItems, setCartItems] = useState(() => {
-    const storedCartItems = localStorage.getItem("cartItems");
+    const storedCartItems = localStorage.getItem('cartItems');
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
 
@@ -42,31 +42,55 @@ function App() {
 
   // логика удаления и добавления карточки в корзину
   function handleAddCard(card) {
-    const cardIndex = cartItems.findIndex(
-      (value) => value.cardId === card.cardId
-    );
+    const cardIndex = cartItems.findIndex((value) => value.cardId === card.cardId);
     if (cardIndex < 0) {
       setCartItems((prevCartItems) => [...prevCartItems, card]);
     } else {
-      setCartItems((prevCartItems) =>
-        prevCartItems.filter((item) => item.cardId !== card.cardId)
-      );
+      setCartItems((prevCartItems) => prevCartItems.filter((item) => item.cardId !== card.cardId));
     }
   }
 
   // отправка формы
-  function handleSubmitForm(data) {
+  async function handleSubmitForm(data) {
     const combinedData = {
       ...data,
       cartItems: cartItems,
     };
 
-    console.log("Combined Data:", combinedData);
+    const formData = {
+      to: data.email,
+      subject: 'Заявка на сайте АОФИ',
+      message: `Здравствуйте! Вы оставили заявку на нешем сайте. В ближайшее время с Вами свяжутся по данным услугам: ${JSON.stringify(
+        cartItems,
+      )} `,
+    };
+
+    console.log(formData);
+
+    try {
+      const response = await fetch('http://158.160.23.0:3001/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+    console.log('Combined Data:', combinedData);
   }
 
   // при изменении корзины обновляется localstorage
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
   // проверка есть ли данный объект в корзине
@@ -165,7 +189,7 @@ function App() {
         onClose={closePopups}
         onAddCard={handleAddCard}
         isCardInCart={isCardInCart}
-      ></InfoPopup>{" "}
+      ></InfoPopup>{' '}
       <OrderPopup
         isOpen={isOrderPopupOpen}
         onClose={closePopups}
