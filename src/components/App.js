@@ -57,12 +57,10 @@ function App() {
       cartItems: cartItems,
     };
 
-    const formattedMessage = formatDataForEmail(combinedData);
-
     const formData = {
       to: data.email,
-      subject: 'Заявка на сайте АОФИ',
-      message: JSON.stringify(formattedMessage),
+      subject: 'Магазин АОФИ новый заказ',
+      data: combinedData,
     };
 
     console.log(formData);
@@ -85,57 +83,6 @@ function App() {
       console.error('Error:', error);
     }
     closePopups();
-    console.log('Combined Data:', combinedData);
-  }
-
-  // Function to format data for email
-  function formatDataForEmail(data) {
-    const formattedMessage = `
-    <html>
-      <head>
-        <style>
-          /* Add any additional styling here */
-        </style>
-      </head>
-      <body>
-        <p>Name: ${data.name}</p>
-        <p>Telephone: ${data.telephone}</p>
-        <p>Email: ${data.email}</p>
-        <p>Organization: ${data.organization}</p>
-
-        <h2>Cart Items:</h2>
-        <ul>
-          ${data.cartItems
-            .map(
-              (item, index) => `
-            <li>
-              ${index + 1}. Product Name: ${item.name}<br>
-              Card ID: ${item.cardId}<br>
-
-              <h3>Offers:</h3>
-              <ul>
-                ${item.offers.data
-                  .map(
-                    (offer, offerIndex) => `
-                  <li>
-                    ${offerIndex + 1}. Name: ${offer.attributes.name}<br>
-                    Description: ${offer.attributes.description}<br>
-                    Value: ${offer.attributes.value}
-                  </li>
-                `,
-                  )
-                  .join('<br>')}
-              </ul>
-            </li>
-          `,
-            )
-            .join('<br>')}
-        </ul>
-      </body>
-    </html>
-  `;
-
-    return formattedMessage;
   }
 
   // при изменении корзины обновляется localstorage

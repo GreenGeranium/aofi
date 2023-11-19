@@ -3,21 +3,21 @@ import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 
 function OrderPopup(props) {
-  // приняты ли условия
-  const [isAgreed, setIsAgreed] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     setValue,
     reset,
+    trigger,
     getValues,
   } = useForm();
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setValue(name, value);
+
+    await trigger(name);
   };
 
   return (
@@ -35,7 +35,6 @@ function OrderPopup(props) {
         method="post"
         onSubmit={(event) => {
           event.preventDefault();
-          console.log(isValid);
           if (isValid) {
             const values = getValues();
             props.onSubmit(values);
@@ -122,17 +121,13 @@ function OrderPopup(props) {
         </label>
 
         <label>
-          <input
-            type="checkbox"
-            className="agreement"
-            onChange={() => {
-              setIsAgreed(!isAgreed);
-            }}
-          />
-          Соглашаюсь с условиями передачи данных
+          <p className="agreement">
+            Нажимая на кнопку "Отправить заказ", Вы соглашаетесь с Политикой обработки персональных
+            данных
+          </p>
         </label>
 
-        <button type="submit" className={`${!isValid && !isAgreed ? 'disabled-button' : ''}`}>
+        <button type="submit" className={!isValid ? 'disabled-button' : ''}>
           Отправить заказ
         </button>
       </form>

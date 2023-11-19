@@ -108,6 +108,7 @@
           display: flex;
           align-items: center;
           column-gap: 9px;
+          flex-direction: column;
 
           @media screen and (max-width: 500px){
             flex-direction: column;
@@ -118,30 +119,8 @@
             margin: 0;
             -webkit-appearance: none;
             appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50px;
-            border: 0.5px solid #F26D0D;
-            outline: none;
-            cursor: pointer;
             box-sizing: content-box;
             padding: 0;
-
-            &:checked {
-              background-color: #F26D0D;
-              background-image: url(../../images/checkedicon.svg);
-              background-repeat: no-repeat;
-              background-position: center;
-              position: relative;
-
-              &::before {
-                content: "";
-                color: #fff;
-                position: absolute;
-                right: 1px;
-                top: -5px;
-              }
-            }
           }
         }
 
