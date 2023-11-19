@@ -170,6 +170,11 @@
 
         }
 
+        .disabled-button {
+          cursor: not-allowed; 
+          opacity: 0.5;
+        }
+
         button {
           background: #052555;
           border-radius: 50px;

@@ -19,7 +19,7 @@ function Header(props) {
             <Link to="https://fitnessassociation.ru/kontakt">Контакты</Link>
           </li>
           <li>
-            <Link to="https://fitnessassociation.ru/sale">Fitness Market</Link>
+            <Link to="http://sales.fitnessassociation.ru/">Fitness Market</Link>
           </li>
           <li>
             <Link to="https://fitnessassociation.ru/event">Мероприятия</Link>

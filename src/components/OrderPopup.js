@@ -9,7 +9,7 @@ function OrderPopup(props) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
     reset,
     getValues,
@@ -35,8 +35,11 @@ function OrderPopup(props) {
         method="post"
         onSubmit={(event) => {
           event.preventDefault();
-          const values = getValues();
-          props.onSubmit(values);
+          console.log(isValid);
+          if (isValid) {
+            const values = getValues();
+            props.onSubmit(values);
+          }
         }}
       >
         <label>
@@ -118,7 +121,6 @@ function OrderPopup(props) {
           {errors.organization && <p className="error">{errors.organization.message}</p>}
         </label>
 
-        <button type="submit">Отправить заказ</button>
         <label>
           <input
             type="checkbox"
@@ -129,6 +131,10 @@ function OrderPopup(props) {
           />
           Соглашаюсь с условиями передачи данных
         </label>
+
+        <button type="submit" className={`${!isValid && !isAgreed ? 'disabled-button' : ''}`}>
+          Отправить заказ
+        </button>
       </form>
     </Popup>
   );
