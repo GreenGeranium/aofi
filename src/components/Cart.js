@@ -1,7 +1,7 @@
-import React from "react";
-import deleteicon from "../images/deleteicon.svg";
-import { Link } from "react-router-dom";
-import { backUrl } from "../utils/db";
+import React from 'react';
+import deleteicon from '../images/deleteicon.svg';
+import { Link } from 'react-router-dom';
+import { backUrl } from '../utils/db';
 
 function Cart(props) {
   function handleSelectAllChange() {
@@ -11,7 +11,7 @@ function Cart(props) {
   return (
     <div className="cart">
       <div className="path">
-        <Link to="/" style={{ color: "inherit", textDecoration: "inherit" }}>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
           <p>Главная</p>
         </Link>
         <div className="arrow"></div>
@@ -20,14 +20,6 @@ function Cart(props) {
       <h2>Корзина</h2>
       <div className="container">
         <div className="choices">
-          <div className="choose">
-            <input
-              type="checkbox"
-              onChange={handleSelectAllChange}
-              checked={props.isAllItemsSelected}
-            />
-            <p>Выбрать все</p>
-          </div>
           <div className="delete">
             <img src={deleteicon} alt="Кнопка удаления из корзины" />
             <p
@@ -45,20 +37,10 @@ function Cart(props) {
               return (
                 <li key={card.cardId}>
                   <div className="description">
-                    <input
-                      checked={props.isAllItemsSelected}
-                      readOnly
-                      disabled
-                      type="checkbox"
-                    />
-                    <img
-                      src={`${backUrl}${card.image.data.attributes.url}`}
-                      alt={card.name}
-                    />
+                    <img src={`${backUrl}${card.image.data.attributes.url}`} alt={card.name} />
                     <h3>{card.name}</h3>
                     <p className="offers">
-                      Предложений:{" "}
-                      <span>{card.offers ? card.offers.data.length : "0"}</span>
+                      Предложений: <span>{card.offers ? card.offers.data.length : '0'}</span>
                     </p>
                     <p
                       className="show"
