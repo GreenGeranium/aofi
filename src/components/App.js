@@ -63,8 +63,6 @@ function App() {
       data: combinedData,
     };
 
-    console.log(formData);
-
     try {
       const response = await fetch('https://emailer.fitnessassociation.ru/send-email', {
         method: 'POST',
@@ -83,6 +81,8 @@ function App() {
       console.error('Error:', error);
     }
     closePopups();
+    setCartItems([]);
+    localStorage.setItem('cartItems', []);
   }
 
   // при изменении корзины обновляется localstorage
