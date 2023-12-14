@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import { backUrl } from '../utils/db';
 
 function Cart(props) {
-  function handleSelectAllChange() {
-    props.onSelectAll();
-  }
-
   return (
     <div className="cart">
       <div className="path">

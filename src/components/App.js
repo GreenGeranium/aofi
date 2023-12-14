@@ -34,10 +34,7 @@ function App() {
 
   // удаление всех карточек из корзины
   function handleDeleteAll() {
-    if (isAllItemsSelected) {
-      setIsAllItemsSelected(false);
-      setCartItems((prevCartItems) => []);
-    }
+    setCartItems((prevCartItems) => []);
   }
 
   // логика удаления и добавления карточки в корзину

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import basketicon from "../images/popupbasket.svg";
-import Popup from "./Popup";
-import api from "../utils/api";
-import { backUrl } from "../utils/db";
+import { useEffect, useState } from 'react';
+import basketicon from '../images/popupbasket.svg';
+import Popup from './Popup';
+import api from '../utils/api';
+import { backUrl } from '../utils/db';
 
 function InfoPopup(props) {
   const [cardData, setCardData] = useState({});
@@ -22,9 +22,7 @@ function InfoPopup(props) {
       <div className="principal">
         <img
           src={`${backUrl}${
-            cardData.image &&
-            cardData.image.data &&
-            cardData.image.data.attributes.url
+            cardData.image && cardData.image.data && cardData.image.data.attributes.url
           }`}
           alt={cardData.name}
         />
@@ -39,46 +37,37 @@ function InfoPopup(props) {
             </p>
           </div>
           <button
-            className={`button ${
-              props.isCardInCart(cardData) ? "button_delete" : "button_add"
-            }`}
+            className={`button ${props.isCardInCart(cardData) ? 'button_delete' : 'button_add'}`}
             onClick={() => {
               props.onAddCard(cardData);
             }}
           >
             {props.isCardInCart(cardData) ? (
-              "Удалить из корзины"
+              'Удалить из корзины'
             ) : (
               <span>
                 Добавить в <img src={basketicon} alt="Иконка корзины" />
               </span>
             )}
           </button>
-          <p className={`text ${isTextExpanded ? "text_expanded" : ""}`}>
-            {cardData.description}
-          </p>
+          <p className={`text ${isTextExpanded ? 'text_expanded' : ''}`}>{cardData.description}</p>
           <p
             className="readmore"
             onClick={() => {
               setIsTextExpanded(!isTextExpanded);
             }}
           >
-            {isTextExpanded ? "Свернуть" : "Читать всё"}
+            {isTextExpanded ? 'Свернуть' : 'Читать всё'}
           </p>
         </div>
       </div>
       <h3 className="bar">Для членов АОФИ</h3>
       <ul className="offers">
-        {cardData.offers &&
-          cardData.offers.data.map((offer) => {
-            return (
-              <li key={offer.attributes.id}>
-                <h4>{offer.attributes.name}</h4>
-                <p className="description">{offer.attributes.description}</p>
-                <p className="value">{offer.attributes.value}</p>
-              </li>
-            );
-          })}
+        <li>
+          <h4>{cardData.offer_name}</h4>
+          <p className="description">{cardData.offer_description}</p>
+          <p className="value">{cardData.offer_value}</p>
+        </li>
       </ul>
     </Popup>
   );

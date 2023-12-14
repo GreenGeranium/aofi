@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import Card from "./Card";
-import React, { useEffect, useState } from "react";
-import api from "../utils/api";
+import { Link } from 'react-router-dom';
+import Card from './Card';
+import React, { useEffect, useState } from 'react';
+import api from '../utils/api';
 
 function SectionWithCategories(props) {
   // выделенная категория
@@ -28,22 +28,33 @@ function SectionWithCategories(props) {
     const updatedCategories = [];
 
     offers.forEach((element) => {
-      const categoryOfElement = element.attributes.category;
-      let addedToCategory = false;
+      const categoriesOfElement = [
+        element.attributes.category1,
+        element.attributes.category2,
+        element.attributes.category3,
+        element.attributes.category4,
+        element.attributes.category5,
+      ];
 
-      updatedCategories.forEach((category) => {
-        if (category.title === categoryOfElement) {
-          category.data.push(element.attributes);
-          addedToCategory = true;
+      categoriesOfElement.forEach((categoryOfElement) => {
+        if (categoryOfElement) {
+          let addedToCategory = false;
+
+          updatedCategories.forEach((category) => {
+            if (category.title === categoryOfElement) {
+              category.data.push(element.attributes);
+              addedToCategory = true;
+            }
+          });
+
+          if (!addedToCategory) {
+            updatedCategories.push({
+              title: categoryOfElement,
+              data: [element.attributes],
+            });
+          }
         }
       });
-
-      if (!addedToCategory) {
-        updatedCategories.push({
-          title: categoryOfElement,
-          data: [element.attributes],
-        });
-      }
     });
 
     setCategories(updatedCategories);
@@ -53,7 +64,7 @@ function SectionWithCategories(props) {
   return (
     <div className="section_categories">
       <div className="path">
-        <Link to="/" style={{ color: "inherit", textDecoration: "inherit" }}>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
           <p>Главная</p>
         </Link>
         <div className="arrow"></div>
@@ -65,9 +76,7 @@ function SectionWithCategories(props) {
           categories.map((element) => {
             return (
               <li
-                className={`type ${
-                  element.title === currentCategory.title ? "type_active" : ""
-                }`}
+                className={`type ${element.title === currentCategory.title ? 'type_active' : ''}`}
                 onClick={() => {
                   setCurrentCategory(element);
                 }}
